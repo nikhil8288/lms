@@ -42,26 +42,38 @@ export default class GlideComponent extends React.Component {
     super(props);
     this.onResize = this.onResize.bind(this);
     this.renderDots = this.renderDots.bind(this);
-    this.state = {
-      total: React.Children.count(this.props.children)
-    };
+  }
+
+  componentDidUpdate() {
+    this.destroyGlide();
+    this.initGlide();
   }
 
   componentDidMount() {
+    this.initGlide();
+  }
+
+  initGlide() {
     this.glideCarousel = new Glide(this.carousel, {...this.props.settings, direction: getDirection().direction});
     this.glideCarousel.mount();
+    this.glideCarousel.on("resize", this.onResize);
     mountTimeOut = setTimeout(() => {
       var event = document.createEvent("HTMLEvents");
       event.initEvent("resize", false, false);
       window.dispatchEvent(event);
-      this.glideCarousel.on("resize", this.onResize);
     }, 500);
   }
 
   componentWillUnmount() {
+    this.destroyGlide();
+  }
+
+  destroyGlide() {
     clearTimeout(resizeTimeOut);
     clearTimeout(mountTimeOut);
+    if(this.glideCarousel)  {
     this.glideCarousel.destroy();
+    }
   }
 
   onResize() {
@@ -73,8 +85,9 @@ export default class GlideComponent extends React.Component {
   }
 
   renderDots() {
+    let total = React.Children.count(this.props.children);
     let dots = [];
-    for (let i = 0; i < this.state.total; i++) {
+    for (let i = 0; i < total; i++) {
       dots.push(
         <button className="glide__bullet slider-dot" key={i} data-glide-dir={"="+i}></button>
       );

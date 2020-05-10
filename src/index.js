@@ -4,8 +4,10 @@ import "react-circular-progressbar/dist/styles.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-table/react-table.css";
-
+import 'react-image-lightbox/style.css';
+import "video.js/dist/video-js.css";
 import { isMultiColorActive, defaultColor,themeColorStorageKey,isDarkSwitchActive } from "./constants/defaultValues";
+
 const color =
   (isMultiColorActive||isDarkSwitchActive ) && localStorage.getItem(themeColorStorageKey)
     ? localStorage.getItem(themeColorStorageKey)

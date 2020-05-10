@@ -1,8 +1,9 @@
 import { defaultDirection } from "../constants/defaultValues";
 
 export const mapOrder = (array, order, key) => {
-  array.sort(function (a, b) {
-    var A = a[key], B = b[key];
+  array.sort(function(a, b) {
+    var A = a[key],
+      B = b[key];
     if (order.indexOf(A + "") > order.indexOf(B + "")) {
       return 1;
     } else {
@@ -12,7 +13,6 @@ export const mapOrder = (array, order, key) => {
   return array;
 };
 
-
 export const getDateWithFormat = () => {
   const today = new Date();
   let dd = today.getDate();
@@ -20,18 +20,18 @@ export const getDateWithFormat = () => {
 
   var yyyy = today.getFullYear();
   if (dd < 10) {
-    dd = '0' + dd;
+    dd = "0" + dd;
   }
   if (mm < 10) {
-    mm = '0' + mm;
+    mm = "0" + mm;
   }
-  return dd + '.' + mm + '.' + yyyy;
-}
+  return dd + "." + mm + "." + yyyy;
+};
 
-export const getCurrentTime=()=>{
+export const getCurrentTime = () => {
   const now = new Date();
-  return now.getHours() + ":" + now.getMinutes()
-}
+  return now.getHours() + ":" + now.getMinutes();
+};
 
 export const getDirection = () => {
   let direction = defaultDirection;
@@ -54,4 +54,3 @@ export const setDirection = localValue => {
   }
   localStorage.setItem("direction", direction);
 };
-
